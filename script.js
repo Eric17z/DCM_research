@@ -75,14 +75,28 @@ fetch('data.json')
             const nodeLabel = document.getElementById('node-label');
 
             nodeImagesDiv.innerHTML = '';
-            if (images && images.length > 0) {
+
+            // Check for specific nodes that require larger images
+            if (label === 'Educational Technology' || label === 'Digital Collection' || label === 'Topic Modeling') {
+                // Show a larger overview image for these specific nodes
+                const img = document.createElement('img');
+                if(label === 'Educational Technology') img.src = `img/r1.png`; 
+                else if(label === 'Digital Collection') img.src = `img/r2.png`;
+                else if(label === 'Topic Modeling') img.src = `img/r3.png`;
+               // img.src = `img/r1.png`; // Use dynamic image path
+                img.alt = label;
+                img.style.maxWidth = '300px'; // Larger image size
+                img.style.height = 'auto';
+                nodeImagesDiv.appendChild(img);
+            } else if (images && images.length > 0) {
+                // Show regular images for other nodes
                 images.forEach((imageSrc) => {
                     const img = document.createElement('img');
                     img.src = imageSrc;
                     img.alt = label;
-                    img.classList.add('hidden');
+                    img.style.maxWidth = '100px'; // Standard image size
+                    img.style.height = 'auto';
                     nodeImagesDiv.appendChild(img);
-                    setTimeout(() => img.classList.remove('hidden'), 50);
                 });
             } else {
                 nodeImagesDiv.innerHTML = '<p>No images available</p>';
