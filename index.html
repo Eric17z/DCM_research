@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1e1e1e; /* Dark gray tone for readability */
+            background-color: #1e1e1e;
             margin: 0;
             overflow: hidden;
         }
@@ -17,10 +17,39 @@
             height: 100vh;
             display: block;
         }
+        #node-info {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: #1e1e1e;
+            padding: 10px;
+            border-radius: 5px;
+            color: #ffffff;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        #node-info.show {
+            display: block;
+            opacity: 1;
+        }
+        #node-images img {
+            max-width: 100px;
+            height: auto;
+            margin-right: 10px;
+            transition: opacity 0.5s ease-in-out;
+        }
+        #node-images img.hidden {
+            opacity: 0;
+        }
     </style>
 </head>
 <body>
     <div id="cy"></div>
+    <div id="node-info">
+        <div id="node-images" style="display: flex; gap: 10px; margin-bottom: 10px;"></div>
+        <span id="node-label"></span>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

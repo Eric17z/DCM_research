@@ -33,25 +33,7 @@ fetch('data.json')
                         'label': 'data(label)',
                         'font-size': '12px',
                         'text-rotation': 'autorotate',
-                        'color': '#FFFFFF', // White for edge labels
-                        'line-style': 'solid'
-                    }
-                },
-                {
-                    selector: ':selected',
-                    style: {
-                        'background-color': '#FF4500', // Red for selected nodes
-                        'line-color': '#FF4500',
-                        'target-arrow-color': '#FF4500',
-                        'source-arrow-color': '#FF4500',
-                        'text-outline-color': '#FF4500'
-                    }
-                },
-                {
-                    selector: '.faded',
-                    style: {
-                        'opacity': 0.25,
-                        'text-opacity': 0.25
+                        'color': '#FFFFFF' // White for edge labels
                     }
                 }
             ],
@@ -59,48 +41,75 @@ fetch('data.json')
             layout: {
                 name: 'preset',
                 positions: {
-                    'hci': { x: 0, y: 0 },
-                    'edTech': { x: -400, y: 0 },
-                    'instructional': { x: -600, y: -100 },
-                    'online': { x: -600, y: 0 },
-                    'elearning': { x: -600, y: 100 },
-                    'digitalCollection': { x: 0, y: 400 },
-                    'digitalLibraries': { x: -150, y: 600 },
-                    'culturalHeritage': { x: 150, y: 600 },
-                    'linkedData': { x: -250, y: 500 },
-                    'semanticWeb': { x: 250, y: 500 },
-                    'topicModeling': { x: 400, y: 0 },
-                    'healthcare': { x: 600, y: -100 },
-                    'socialMedia': { x: 600, y: 0 },
-                    'policy': { x: 600, y: 100 },
-                    'digitalHumanities': { x: 600, y: 200 }
+                    'hci': { x: 0, y: 0 }, // Central node
+                    'edTech': { x: -400, y: 0 }, // Left of HCI
+                    'instructional': { x: -600, y: -100 }, // Top-left of Educational Technology
+                    'online': { x: -600, y: 0 }, // Left of Educational Technology
+                    'elearning': { x: -600, y: 100 }, // Bottom-left of Educational Technology
+                    'digitalCollection': { x: 0, y: 400 }, // Below HCI
+                    'digitalLibraries': { x: -150, y: 600 }, // Bottom-left of Digital Collection
+                    'culturalHeritage': { x: 150, y: 600 }, // Bottom-right of Digital Collection
+                    'linkedData': { x: -300, y: 500 }, // Far-left of Digital Collection
+                    'semanticWeb': { x: 300, y: 500 }, // Far-right of Digital Collection
+                    'topicModeling': { x: 400, y: 0 }, // Right of HCI
+                    'healthcare': { x: 600, y: -100 }, // Top-right of Topic Modeling
+                    'socialMedia': { x: 600, y: 0 }, // Right of Topic Modeling
+                    'policy': { x: 600, y: 100 }, // Bottom-right of Topic Modeling
+                    'digitalHumanities': { x: 600, y: 200 } // Far-bottom-right of Topic Modeling
                 },
-                fit: true, // Ensures the graph fits within the viewport
+                fit: true,
                 padding: 50
             }
         });
 
-        // Highlight neighbors on node click
+        // Highlight neighbors, display images, and zoom into the node with its neighborhood
         cy.on('tap', 'node', function (event) {
             const node = event.target;
-            const neighborhood = node.neighborhood().add(node);
+            const neighborhood = node.neighborhood().add(node); // Get the node and its immediate neighbors
+            const label = node.data('label');
+            const images = node.data('images'); // Array of images
 
-            cy.elements().addClass('faded');
-            neighborhood.removeClass('faded');
+            // Update the HTML content with the node info
+            const nodeInfoDiv = document.getElementById('node-info');
+            const nodeImagesDiv = document.getElementById('node-images');
+            const nodeLabel = document.getElementById('node-label');
 
+            nodeImagesDiv.innerHTML = '';
+            if (images && images.length > 0) {
+                images.forEach((imageSrc) => {
+                    const img = document.createElement('img');
+                    img.src = imageSrc;
+                    img.alt = label;
+                    img.classList.add('hidden');
+                    nodeImagesDiv.appendChild(img);
+                    setTimeout(() => img.classList.remove('hidden'), 50);
+                });
+            } else {
+                nodeImagesDiv.innerHTML = '<p>No images available</p>';
+            }
+
+            nodeLabel.textContent = label;
+
+            // Reset and add fade-in effect for the node-info div
+            nodeInfoDiv.style.display = 'block';
+            setTimeout(() => nodeInfoDiv.classList.add('show'), 10);
+
+            // Zoom into the node and its neighborhood
             cy.animate({
                 fit: {
                     eles: neighborhood,
-                    padding: 20
+                    padding: 100 // Wider padding to include subnodes
                 },
                 duration: 1000
             });
         });
 
-        // Reset on background click
+        // Reset on background click and zoom out to show all nodes
         cy.on('tap', function (event) {
             if (event.target === cy) {
-                cy.elements().removeClass('faded');
+                const nodeInfoDiv = document.getElementById('node-info');
+                nodeInfoDiv.classList.remove('show');
+                setTimeout(() => (nodeInfoDiv.style.display = 'none'), 500);
 
                 cy.animate({
                     fit: {
@@ -110,19 +119,6 @@ fetch('data.json')
                     duration: 1000
                 });
             }
-        });
-
-        // Add hover effects for nodes
-        cy.on('mouseover', 'node', function (event) {
-            const node = event.target;
-            node.style('font-size', '18px');
-            node.style('background-color', '#00BFFF'); // Brighter blue on hover
-        });
-
-        cy.on('mouseout', 'node', function (event) {
-            const node = event.target;
-            node.style('font-size', '14px');
-            node.style('background-color', '#0078D7');
         });
     })
     .catch(error => console.error('Error loading data:', error));
