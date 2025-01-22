@@ -1,0 +1,35 @@
+{
+    "nodes": [
+        { "data": { "id": "hci", "label": "Human-Computer Interaction (HCI)" } },
+        { "data": { "id": "edTech", "label": "Educational Technology" } },
+        { "data": { "id": "instructional", "label": "Instructional Design" } },
+        { "data": { "id": "online", "label": "Online Learning" } },
+        { "data": { "id": "elearning", "label": "e-Learning" } },
+        { "data": { "id": "digitalCollection", "label": "Digital Collection" } },
+        { "data": { "id": "digitalLibraries", "label": "Digital Libraries" } },
+        { "data": { "id": "culturalHeritage", "label": "Cultural Heritage" } },
+        { "data": { "id": "linkedData", "label": "Linked Data" } },
+        { "data": { "id": "semanticWeb", "label": "Semantic Web" } },
+        { "data": { "id": "topicModeling", "label": "Topic Modeling" } },
+        { "data": { "id": "healthcare", "label": "Healthcare" } },
+        { "data": { "id": "socialMedia", "label": "Social Media" } },
+        { "data": { "id": "policy", "label": "Policy and Governance" } },
+        { "data": { "id": "digitalHumanities", "label": "Digital Humanities" } }
+    ],
+    "edges": [
+        { "data": { "source": "hci", "target": "edTech", "label": "supports" } },
+        { "data": { "source": "hci", "target": "digitalCollection", "label": "enables" } },
+        { "data": { "source": "hci", "target": "topicModeling", "label": "analyzes" } },
+        { "data": { "source": "edTech", "target": "instructional", "label": "includes" } },
+        { "data": { "source": "edTech", "target": "online", "label": "includes" } },
+        { "data": { "source": "edTech", "target": "elearning", "label": "includes" } },
+        { "data": { "source": "digitalCollection", "target": "digitalLibraries", "label": "includes" } },
+        { "data": { "source": "digitalCollection", "target": "culturalHeritage", "label": "preserves" } },
+        { "data": { "source": "digitalCollection", "target": "linkedData", "label": "supports" } },
+        { "data": { "source": "digitalCollection", "target": "semanticWeb", "label": "enables" } },
+        { "data": { "source": "topicModeling", "target": "healthcare", "label": "analyzes" } },
+        { "data": { "source": "topicModeling", "target": "socialMedia", "label": "analyzes" } },
+        { "data": { "source": "topicModeling", "target": "policy", "label": "analyzes" } },
+        { "data": { "source": "topicModeling", "target": "digitalHumanities", "label": "analyzes" } }
+    ]
+}
