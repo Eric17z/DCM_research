@@ -94,7 +94,7 @@ fetch('data.json')
                     const img = document.createElement('img');
                     img.src = imageSrc;
                     img.alt = label;
-                    img.style.maxWidth = '100px'; // Standard image size
+                    img.style.maxWidth = '300px'; // Standard image size
                     img.style.height = 'auto';
                     nodeImagesDiv.appendChild(img);
                 });
