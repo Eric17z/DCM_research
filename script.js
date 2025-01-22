@@ -85,7 +85,7 @@ fetch('data.json')
                 else if(label === 'Topic Modeling') img.src = `img/r3.png`;
                // img.src = `img/r1.png`; // Use dynamic image path
                 img.alt = label;
-                img.style.maxWidth = '600px'; // Larger image size
+                img.style.maxWidth = '50%'; // Larger image size
                 img.style.height = 'auto';
                 nodeImagesDiv.appendChild(img);
             } else if (images && images.length > 0) {
@@ -94,7 +94,7 @@ fetch('data.json')
                     const img = document.createElement('img');
                     img.src = imageSrc;
                     img.alt = label;
-                    img.style.maxWidth = '150px'; // Standard image size
+                    img.style.maxWidth = '100px'; // Standard image size
                     img.style.height = 'auto';
                     nodeImagesDiv.appendChild(img);
                 });
