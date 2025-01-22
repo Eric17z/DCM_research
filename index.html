@@ -34,13 +34,14 @@
             position: absolute;
             bottom: 10px;
             left: 10px;
-            background: #1e1e1e;
+            background: rgba(30, 30, 30, 0.9); /* Slight transparency for better visibility */
             padding: 10px;
             border-radius: 5px;
             color: #ffffff;
             display: none;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
+            z-index: 3; /* Ensure it is above the graph */
         }
         #node-info.show {
             display: block;
@@ -56,6 +57,7 @@
             opacity: 0;
         }
     </style>
+    
 </head>
 <body>
     <!-- Background Logo -->
