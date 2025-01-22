@@ -12,21 +12,23 @@
             margin: 0;
             overflow: hidden;
         }
+        #background-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1; /* Behind the graph */
+            opacity: 0.1; /* Low opacity for subtle appearance */
+            max-width: 400px; /* Adjust size as needed */
+            height: auto;
+            pointer-events: none; /* Prevent interaction with the logo */
+        }
         #cy {
             width: 100%;
-            height: 100vh; /* Full height to keep the graph size intact */
+            height: 100vh;
             display: block;
-        }
-        #logo {
-            position: absolute;
-            top: 20px; /* Bring the logo closer to the graph */
-            left: 50%;
-            transform: translateX(-50%);
-            max-width: 120px; /* Slightly smaller logo for better fit */
-            height: auto;
-            z-index: 10; /* Ensure it stays above the graph */
-            opacity: 0.9; /* Slight transparency for better integration */
-            pointer-events: none; /* Ensure the logo doesn't interfere with interactions */
+            position: relative;
+            z-index: 2; /* Above the background logo */
         }
         #node-info {
             position: absolute;
@@ -54,12 +56,10 @@
             opacity: 0;
         }
     </style>
-    
-    
 </head>
 <body>
-    <!-- Logo -->
-    <img id="logo" src="img/DCM LOGO-01.png" alt="DCM Logo">
+    <!-- Background Logo -->
+    <img id="background-logo" src="img/DCM LOGO-01.png" alt="DCM Logo">
 
     <!-- Cytoscape Graph Container -->
     <div id="cy"></div>
