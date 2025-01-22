@@ -85,7 +85,7 @@ fetch('data.json')
                 else if(label === 'Topic Modeling') img.src = `img/r3.png`;
                // img.src = `img/r1.png`; // Use dynamic image path
                 img.alt = label;
-                img.style.maxWidth = '70%'; // Larger image size
+                img.style.maxWidth = '800px'; // Larger image size
                 img.style.height = 'auto';
                 nodeImagesDiv.appendChild(img);
             } else if (images && images.length > 0) {
