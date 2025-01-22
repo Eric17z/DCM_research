@@ -14,8 +14,19 @@
         }
         #cy {
             width: 100%;
-            height: 100vh;
+            height: 100vh; /* Full height to keep the graph size intact */
             display: block;
+        }
+        #logo {
+            position: absolute;
+            top: 20px; /* Bring the logo closer to the graph */
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 120px; /* Slightly smaller logo for better fit */
+            height: auto;
+            z-index: 10; /* Ensure it stays above the graph */
+            opacity: 0.9; /* Slight transparency for better integration */
+            pointer-events: none; /* Ensure the logo doesn't interfere with interactions */
         }
         #node-info {
             position: absolute;
@@ -43,13 +54,23 @@
             opacity: 0;
         }
     </style>
+    
+    
 </head>
 <body>
+    <!-- Logo -->
+    <img id="logo" src="img/DCM LOGO-01.png" alt="DCM Logo">
+
+    <!-- Cytoscape Graph Container -->
     <div id="cy"></div>
+
+    <!-- Node Info -->
     <div id="node-info">
         <div id="node-images" style="display: flex; gap: 10px; margin-bottom: 10px;"></div>
         <span id="node-label"></span>
     </div>
+
+    <!-- Script -->
     <script src="script.js"></script>
 </body>
 </html>
